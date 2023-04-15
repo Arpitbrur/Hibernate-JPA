@@ -17,7 +17,7 @@ public class TeamsController {
 		
 		while(true) {
 			System.out.println("Enter your choice");
-			System.out.println("1.insert\n2. Search\n3. Delete");
+			System.out.println("1. Insert\n2. Search\n3. Delete\n4. Update\n5. Display\n6. Exit");
 			int ch = sc.nextInt();
 			switch(ch) {
 			case 1:{
@@ -90,11 +90,80 @@ public class TeamsController {
 				}
 			}break;
 			
-//			case 3:{
-//				System.out.println("Enter teamid");
-//				teamsService.deleteTeams(sc.nextInt());
-//				
-//              }
+			case 3:{
+				System.out.println("Enter teamid");
+				teamsService.deleteTeams(sc.nextInt());
+				
+              }
+			
+			case 4:{
+				Teams teams = new Teams();
+				System.out.println("=================Enter First Team==============");
+				System.out.println("enter teanId: ");
+				teams.setTeamId(sc.nextInt());
+				System.out.println("Enter team Name");
+				teams.setTeamName(sc.next());
+				System.out.println("Enter team Coach");
+				teams.setTeamCoach(sc.next());
+				System.out.println("Enter teamCAption");
+				teams.setTeamCaption(sc.next());
+				System.out.println("Enter team Size");
+				teams.setTeamsize(sc.nextInt());
+				
+				System.out.println("===================Enter Competition Detail=================");
+				Competition competition = new Competition();			
+				System.out.println("Enter Competition Name");
+				competition.setComprtitionName(sc.next());
+				System.out.println("Enter Competition Year");
+				int year = LocalDateTime.now().getYear();
+				competition.setCompetitionYear(year);
+				System.out.println("Enter Competition Chairman");
+				competition.setCompetitionChairman(sc.next());
+				System.out.println("Enter Cmpetiton Sponser Name");
+				competition.setSponsersName(sc.next());
+				
+				teams.setCompetition(competition);
+				teamsService.updateTeams(teams);
+				
+			}
+			case 5:{
+				List<Teams> list = teamsService.displayTeams();
+				if(list != null) {
+					for (Teams teams : list) {
+						System.out.println("=====================Teams Detail=====================");
+						System.out.println("teamID: "+teams.getTeamId());
+						System.out.println("teamName: "+teams.getTeamName());
+						System.out.println("teamCoach: "+teams.getTeamCoach());
+						System.out.println("teamCaption: "+teams.getTeamCaption());
+						System.out.println("teamSize: "+teams.getTeamsize());
+						
+						System.out.println("=====================Competition Detail================");
+						System.out.println("CompetitonID: "+teams.getCompetition().getCompetitionId());
+						System.out.println("CompetitonName: "+teams.getCompetition().getComprtitionName());
+						System.out.println("CompetitonYear:" +teams.getCompetition().getCompetitionYear());
+						System.out.println("CompetitonSponser: "+teams.getCompetition().getSponsersName());
+						System.out.println("CompetitonChairman: "+teams.getCompetition().getCompetitionChairman());
+						System.out.println(" ");
+
+	 		/*
+	 		 * here we give @transient to CompetitionChairman in dto so in database no colume will 
+			 * be create and no data will store in CompetitionChairman. It show competitionChairman is null.  
+			 */
+					}
+				}else {
+					System.out.println("table is empty in database");
+				}
+				
+			}break;
+			
+			case 6:{
+				System.out.println("System closed Successfully");
+				System.exit(ch);
+			}break;
+			
+			default:{
+				System.out.println("Invalid Choice");
+			}
 			}
 		}
 	}

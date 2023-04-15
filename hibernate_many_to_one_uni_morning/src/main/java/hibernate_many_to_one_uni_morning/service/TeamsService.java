@@ -20,12 +20,22 @@ public class TeamsService {
 		}
 		
 		// delete method
-//		public void deleteTeams(int teamsId) {
-//		Teams teams= dao.searchTeams(teamsId);
-//		if(teams != null) {
-//			dao.deleteTeams(teamsId);
-//		}else {
-//			System.out.println("teamID is not present in database");
-//		}
-//		}
+		public void deleteTeams(int teamsId) {
+		Teams teams= dao.searchTeams(teamsId);
+		if(teams != null) {
+			dao.deleteTeams(teamsId);
+		}else {
+			System.out.println("teamID is not present in database");
+		}
+		}
+		
+		// update Method	
+		public void updateTeams(Teams teams) {
+			dao.updateTeams(teams);
+		}
+		
+		// display method
+		public List<Teams> displayTeams() {
+			return dao.displayTeams();
+		}
 }
