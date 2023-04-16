@@ -50,10 +50,14 @@ public class TeamsController {
 				System.out.println("Enter Competition Year");
 				int year = LocalDateTime.now().getYear();
 				competition.setCompetitionYear(year);
-				System.out.println("Enter Competition Chairman");
-				competition.setCompetitionChairman(sc.next());
 				System.out.println("Enter Cmpetiton Sponser Name");
 				competition.setSponsersName(sc.next());
+				System.out.println("Enter Competition Chairman");
+				competition.setCompetitionChairman(sc.next());
+		   /*
+		 	* here we give @transient to CompetitionChairman in dto so in database no column will 
+			* be create and no data will store in CompetitionChairman. It show competitionChairman is null.  
+			*/
 				
 				teams.setCompetition(competition);
 				teams1.setCompetition(competition);
@@ -84,7 +88,12 @@ public class TeamsController {
 					System.out.println("CompetitonYear: "+teams.getCompetition().getCompetitionYear());
 					System.out.println("CompetitionSponser: "+ teams.getCompetition().getSponsersName());
 					System.out.println("CompetitonChairman: "+ teams.getCompetition().getCompetitionChairman());
-					
+				
+			/*
+			 * here we give @transient to CompetitionChairman in dto so in database no colume will 
+			 * be create and no data will store in CompetitionChairman. It show competitionChairman is null.  
+			 */
+							
 				}else {
 					System.out.println("Invalid teamsId please check again");
 				}
