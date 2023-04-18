@@ -1,6 +1,7 @@
 package hibernate_many_to_one_uni_morning.controller;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Scanner;
 
 import hibernate_many_to_one_uni_morning.dto.Competition;
@@ -14,7 +15,7 @@ public class CompetitionController {
 		CompetitionService competitionService = new CompetitionService();
 		while(true) {
 			System.out.println("Enter your choice");
-			System.out.println("1. Insert\n2. Search\n3. Update");
+			System.out.println("1. Insert\n2. Search\n3. Update\n4. Delete\n5. Display\n6. Exit");
 			int ch = sc.nextInt();
 			switch(ch) {
 			case 1:{
@@ -66,6 +67,38 @@ public class CompetitionController {
 				competition.setCompetitionChairman(sc.next());
 				
 				competitionService.updateCompetition(competition);
+			}break;
+			
+			case 4:{
+				System.out.println("Enter CompetitionId");
+				competitionService.deleteCompetition(sc.nextInt());
+					
+			}break;
+			
+			case 5:{
+				List<Competition> list = competitionService.displayCompetition();
+				if(list != null) {
+					System.out.println("===============Competition Details============");
+					for (Competition competition : list) {
+						System.out.println("CompetitonId:"+competition.getCompetitionId());
+						System.out.println("CompetitonName: "+competition.getComprtitionName());
+						System.out.println("CompetitonYear: "+competition.getCompetitionYear());
+						System.out.println("CompetitonChairman: "+competition.getCompetitionChairman());
+						System.out.println("CompetitonSponser: "+competition.getSponsersName());
+						System.out.println(" ");
+					}
+				}else {
+					System.out.println(" table is empty in databse");
+				}
+				
+			}break;
+			
+			case 6:{
+				System.out.println("System closed");
+				System.exit(ch);
+			}
+			default:{
+				System.out.println("Invalid choice");
 			}
 			}
 			
