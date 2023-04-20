@@ -25,7 +25,7 @@ public class Student {
 	private String studentName;
 	private String studentEmail;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
 	private List<Subject> subject;
 
 	public Student(int studentId, String studentName, String studentEmail) {
